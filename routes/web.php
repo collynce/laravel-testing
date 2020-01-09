@@ -12,29 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('blog');
 });
-
-Route::get('/posts', 'PostsController@index');
-
-Route::post('/add', 'PostsController@store');
-
-Route::put('/edit/{id}', 'PostsController@update');
-
+Route::get('/create', function () {
+    return view('admin.create');
+});
+Route::get('/admin', function () {
+    return view('admin.index');
+});
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/posts', 'PostsController@index');
-    Route::post('/add', 'PostsController@store');
-    Route::put('/edit/{id}', 'PostsController@update');
+    Route::resource('posts', 'PostsController');
+
 });
-
-Route::group(['namespace' => 'Posts'], function () {
-    Route::get('/posts', 'PostsController@index');
-    Route::post('/add', 'PostsController@store');
-    Route::put('/edit/{id}', 'PostsController@update');
-});
-
-
 
 Auth::routes();
 
