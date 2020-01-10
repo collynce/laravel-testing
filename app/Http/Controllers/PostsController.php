@@ -9,6 +9,7 @@ use App\Posts as Post;
 use App\Mail\SendMail;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +24,11 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::paginate(8);
+       $posts = Cache::remember('posts', 1, function (){
+            return Post::paginate(8);
+        });
         return view('admin.index', compact('posts'));
+
     }
 
 
