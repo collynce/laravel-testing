@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Mail;
 class PostsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>'show']);
+    }
+
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(8);
         return view('admin.index', compact('posts'));
     }
 

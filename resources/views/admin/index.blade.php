@@ -19,6 +19,10 @@
 
 
                         <div class="panel-body table-responsive">
+                            <div class="d-flex justify-content-end">
+                                {{ $posts->links() }}
+                            </div>
+
                             <table
                                 class="table table-bordered table-striped">
                                 <thead>
@@ -66,6 +70,9 @@
                                 @endif
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $posts->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

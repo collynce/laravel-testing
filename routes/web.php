@@ -1,10 +1,7 @@
 <?php
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('posts', 'PostsController');
-
-});
-
+Route::resource('posts', 'PostsController');
+Route::resource('blog', 'HomeController');
 
 Route::get('/', 'HomeController@index')->name('home');
