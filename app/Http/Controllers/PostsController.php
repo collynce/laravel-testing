@@ -14,14 +14,14 @@ class PostsController extends Controller
 
     public function index()
     {
-        $post = Post::all();
-        return view('admin.index', compact('post'));
+        $posts = Post::all();
+        return view('admin.index', compact('posts'));
     }
 
 
     public function create()
     {
-
+        return view('admin.create');
     }
 
 
@@ -57,6 +57,7 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->route('admin.index');
+        return redirect()->route('posts.index');
+
     }
 }
