@@ -111,4 +111,4 @@
         </div><!-- /.row -->
 
     </main><!-- /.container -->
-@show
+@endsection
