@@ -13,14 +13,18 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('title');
-            $table->string('description');
-            $table->string('author');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('posts')) {
+
+            Schema::create('posts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('author_id')->unsigned();;
+                $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+                $table->string('name');
+                $table->string('title');
+                $table->string('description');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

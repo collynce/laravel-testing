@@ -9,7 +9,7 @@
             {{ $posts->links() }}
         </div>
 
-        <div class="d-flex">
+        <div class="col">
                 <div class="row">
                     @foreach($posts as $post)
                     <div class="card m-1 mb-2 col-5 box-shadow">

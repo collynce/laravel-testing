@@ -17,7 +17,9 @@
 
                     <div class="panel panel-default">
 
-
+                        @if (session('message'))
+                            <div class="alert alert-success">{{ session('message') }}</div>
+                        @endif
                         <div class="panel-body table-responsive">
                             <div class="d-flex justify-content-end">
                                 {{ $posts->links() }}

@@ -30,17 +30,18 @@ class PostsController extends Controller
     public function create()
     {
         return view('admin.create');
-
     }
-
 
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
-       Mail::to($request->user())->queue(new SendMail($post));;
-        return redirect()->route('posts.index');
+        try {
+            $post = Post::create($request->all());
+            Mail::to($request->user())->queue(new SendMail($post));;
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred, please try again.');
+        }
+        return redirect()->route('posts.index')->with('message', 'Post created successfully.');
     }
-
 
     public function show($id)
     {
@@ -51,6 +52,7 @@ class PostsController extends Controller
 
     public function edit($id)
     {
+
         $post = Post::findOrFail($id);
         return view('admin.edit', compact('post'));
     }
@@ -58,9 +60,14 @@ class PostsController extends Controller
 
     public function update(Request $request, $id)
     {
+        try{
         $post = Post::findOrFail($id);
         $post-> update($request->all());
-        return redirect()->route('posts.index');
+        } catch (\Exception $e){
+            return redirect()->back()->with('error', 'An error occurred, please try again.');
+        }
+        return redirect()->route('posts.index')->with('message', 'Update successful.');
+
     }
 
     public function destroy($id)
@@ -68,6 +75,5 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
         return redirect()->route('posts.index');
-
     }
 }
