@@ -34,7 +34,7 @@ class PostsController extends Controller
     }
 
 
-    public function store(Request $request, $user)
+    public function store(Request $request)
     {
         $post = Post::create($request->all());
        Mail::to($request->user())->queue(new SendMail($post));;

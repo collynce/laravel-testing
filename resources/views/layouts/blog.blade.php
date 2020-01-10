@@ -10,16 +10,12 @@
 
                 <div class="blog-post">
                     <h2 class="blog-post-title">{{$posts->title}}</h2>
-                    <p class="blog-post-meta">{{$posts->created_at}} by <a href="#">Mark</a></p>
+                    <p class="blog-post-meta">{{$posts->created_at}} by <a href="#">{{$posts->author}}</a></p>
                     <p>{{$posts->name}}</p>
                     <hr>
                     <p>{{$posts->description}}</p>
                 </div><!-- /.blog-post -->
 
-                <nav class="blog-pagination">
-                    <a class="btn btn-outline-primary" href="#">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-                </nav>
 
             </div><!-- /.blog-main -->
 

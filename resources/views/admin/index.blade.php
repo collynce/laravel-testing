@@ -39,24 +39,14 @@
                                     @foreach($posts as $post)
                                         <tr data-entry-id="{{ $post->id }}">
                                             <td>{{ $post->title }}</td>
-                                            <td>
-                                                {{
-                                                    Auth::user()->id
-
-                                                }}
-                                            </td>
+                                            <td>{{$post->author}} </td>
                                             <td>{{ $post->created_at}}</td>
                                             <td>{!! $post->updated_at !!}</td>
                                             <td>
-
                                                 <a href="{{ route('posts.show',[$post->id]) }}"
                                                    class="btn btn-xs btn-primary">View</a>
-
-
                                                 <a href="{{ route('posts.edit',[$post->id]) }}"
                                                    class="btn btn-xs btn-warning">Edit</a>
-
-
                                                 {!! Form::open(array(
                                                     'style' => 'display: inline-block;',
                                                     'method' => 'DELETE',
