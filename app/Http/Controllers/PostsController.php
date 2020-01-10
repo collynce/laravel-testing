@@ -10,6 +10,7 @@ use App\Mail\SendMail;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PostsController extends Controller
@@ -36,9 +37,12 @@ class PostsController extends Controller
     {
         try {
             $post = Post::create($request->all());
-            Mail::to($request->user())->queue(new SendMail($post));;
+            Mail::to($request->user())->queue(new SendMail($post));
+            Log::info('Post created successfully');
         } catch (\Exception $e) {
+            Log::error('An error occurred '.$e);
             return redirect()->back()->with('error', 'An error occurred, please try again.');
+
         }
         return redirect()->route('posts.index')->with('message', 'Post created successfully.');
     }
