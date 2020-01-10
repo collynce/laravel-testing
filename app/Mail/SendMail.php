@@ -16,7 +16,7 @@ class SendMail extends Mailable
      *
      * @return void
      */
-    protected $blogData;
+    public $blogData;
     public function __construct($blogData)
     {
         $this->blogData = $blogData;
@@ -31,11 +31,7 @@ class SendMail extends Mailable
     {
 
         return $this->from('interns@cytonn.test')
-                    ->view('views.mail')
-                    ->with([
-                        'blogName' => $this->blogData->name,
-                        'blogTitle' => $this->blogData->title
-                    ]);
+                    ->view('mail.email');
     }
 }
 

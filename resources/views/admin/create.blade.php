@@ -28,7 +28,7 @@
 
                             <div class="col-xs-12 form-group">
                                 {!! Form::label('description', 'Description*', ['class' => 'control-label']) !!}
-                                {!! Form::text('description', old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                             </div>
                         </div>
                         <div class="row justify-content-center">

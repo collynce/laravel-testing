@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Posts as Post;
+use App\Mail\SendMail;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PostsController extends Controller
 {
@@ -22,12 +25,14 @@ class PostsController extends Controller
     public function create()
     {
         return view('admin.create');
+
     }
 
 
     public function store(Request $request)
     {
         $post = Post::create($request->all());
+       Mail::to($request->user())->queue(new SendMail($post));;
         return redirect()->route('posts.index');
     }
 
