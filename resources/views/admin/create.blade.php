@@ -15,7 +15,6 @@
 
                         <div class="panel-body">
 
-
                             <div class="form-group">
                                 {!! Form::label('name', 'Post Name*', ['class' => 'control-label']) !!}
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
@@ -25,11 +24,11 @@
                                 {!! Form::label('title', 'Title*', ['class' => 'control-label']) !!}
                                 {!! Form::text('title', old('title'),  ['class' => 'form-control editor', 'placeholder' => '', 'required'=>'']) !!}
                             </div>
-
                             <div class="col-xs-12 form-group">
                                 {!! Form::label('description', 'Description*', ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                                {!! Form::textarea('description',  old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                             </div>
+                            {!! Form::hidden('author', Auth::user()->name, old('author')) !!}
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-5">
@@ -37,7 +36,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     {!! Form::close() !!}
 

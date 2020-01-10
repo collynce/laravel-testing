@@ -39,7 +39,12 @@
                                     @foreach($posts as $post)
                                         <tr data-entry-id="{{ $post->id }}">
                                             <td>{{ $post->title }}</td>
-                                            <td>{{ $post->name}}</td>
+                                            <td>
+                                                {{
+                                                    Auth::user()->id
+
+                                                }}
+                                            </td>
                                             <td>{{ $post->created_at}}</td>
                                             <td>{!! $post->updated_at !!}</td>
                                             <td>
