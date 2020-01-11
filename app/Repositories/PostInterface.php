@@ -20,6 +20,7 @@ interface PostInterface
 
     public function newUpdate(Request $request, $id);
 
+    public function fetchCategory($value);
 
 }
 

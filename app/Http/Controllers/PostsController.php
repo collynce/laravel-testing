@@ -80,9 +80,7 @@ class PostsController extends Controller
 
     public function fetchCategory()
     {
-        $category = Cache::remember('category', 20, function (){
-            return Post::FetchCategory()->get();
-        });
+        $category =  Post::FetchCategory('ss')->get();
 
         return view('welcome', compact('category'));
     }

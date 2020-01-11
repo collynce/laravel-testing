@@ -14,9 +14,9 @@ class Posts extends Model
 //    public $category;
 
 
-    public static function scopeFetchCategory($query, $value)
+    public static function scopeFetchCategory($query,$value)
     {
-        return $query->where('category', $value)->orderBy('created_at');
+        return $query->where('title', '=', $value)->orderBy('created_at');
     }
 
     public function setTitleAttribute($value)

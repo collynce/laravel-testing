@@ -4,6 +4,7 @@
 namespace App\Repositories;
 use App\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PostRepository implements PostInterface
 {
@@ -35,6 +36,12 @@ class PostRepository implements PostInterface
     {
         $post = Posts::findOrFail($id);
         $post-> update($request->all());
+    }
+
+    public function fetchCategory($value)
+    {
+            return Posts::FetchCategory('ss')->get();
+
     }
 
 }
