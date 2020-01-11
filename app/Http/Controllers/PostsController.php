@@ -13,28 +13,30 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Repositories\PostInterface;
 
 class PostsController extends Controller
 {
-
-    public function __construct()
+    protected $post;
+    public function __construct(PostInterface $post)
     {
         $this->middleware('auth', ['except'=>'show']);
+        $this->post = $post;
     }
 
     public function index()
     {
-       $posts = Cache::remember('posts', 1, function (){
-            return Post::paginate(8);
-        });
+        $posts = $this->post->all();
         return view('admin.index', compact('posts'));
-
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.create');
+        $post = new Post();
+        $post->title = $request->title;
+        $post->save();
+        return redirect()->route('admin.index');
     }
 
     public function store(Request $request)
@@ -51,9 +53,10 @@ class PostsController extends Controller
         return redirect()->route('posts.index')->with('message', 'Post created successfully.');
     }
 
-    public function show($id)
+    public function show($value)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find(50);
+        $post->where('category', $value)->orderBy('created_at')->get();
         return view('admin.show', compact('post'));
     }
 
@@ -75,7 +78,6 @@ class PostsController extends Controller
             return redirect()->back()->with('error', 'An error occurred, please try again.');
         }
         return redirect()->route('posts.index')->with('message', 'Update successful.');
-
     }
 
     public function destroy($id)
@@ -84,4 +86,14 @@ class PostsController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function fetchCategory()
+    {
+        $category = Cache::remember('category', 20, function (){
+            return Post::FetchCategory()->get();
+        });
+
+        return view('welcome', compact('category'));
+    }
+
 }

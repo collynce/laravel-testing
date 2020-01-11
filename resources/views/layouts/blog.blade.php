@@ -7,7 +7,8 @@
                 <h3 class="pb-3 mb-4 font-italic border-bottom">
 
                 </h3>
-
+                <a href="{{ route('posts.edit',[$posts->id]) }}"
+                   class="btn btn-xs btn-warning">Edit</a>
                 <div class="blog-post">
                     <h2 class="blog-post-title">{{$posts->title}}</h2>
                     <p class="blog-post-meta">{{$posts->created_at}} by <a href="#">{{$posts->author}}</a></p>

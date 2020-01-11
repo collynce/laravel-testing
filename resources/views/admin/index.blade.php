@@ -21,7 +21,7 @@
                         @endif
                         <div class="panel-body table-responsive">
                             <div class="d-flex justify-content-end">
-                                {{ $posts->links() }}
+{{--                                {{ $posts->links() }}--}}
                             </div>
 
                             <table
@@ -67,7 +67,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-center">
-                                {{ $posts->links() }}
+{{--                                {{ $posts->links() }}--}}
                             </div>
                         </div>
                     </div>
