@@ -33,47 +33,39 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->save();
-        return redirect()->route('admin.index');
+       return view('admin.create');
     }
 
     public function store(Request $request)
     {
         try {
-            $post = Post::create($request->all());
+            $post = $this->post->newPost($request);
             Mail::to($request->user())->queue(new SendMail($post));
             Log::info('Post created successfully');
         } catch (\Exception $e) {
             Log::error('An error occurred '.$e);
             return redirect()->back()->with('error', 'An error occurred, please try again.');
-
         }
         return redirect()->route('posts.index')->with('message', 'Post created successfully.');
     }
 
-    public function show($value)
+    public function show($id)
     {
-        $post = Post::find(50);
-        $post->where('category', $value)->orderBy('created_at')->get();
+        $post = $this->post->get($id);
         return view('admin.show', compact('post'));
     }
 
 
     public function edit($id)
     {
-
-        $post = Post::findOrFail($id);
+        $post = $this->post->change($id);
         return view('admin.edit', compact('post'));
     }
-
 
     public function update(Request $request, $id)
     {
         try{
-        $post = Post::findOrFail($id);
-        $post-> update($request->all());
+        $this->post->newUpdate($request, $id);
         } catch (\Exception $e){
             return redirect()->back()->with('error', 'An error occurred, please try again.');
         }
@@ -82,8 +74,7 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
+        $this->post->delete($id);
         return redirect()->route('posts.index');
     }
 
