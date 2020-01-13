@@ -22,11 +22,7 @@ abstract class DuskTestCase extends BaseTestCase
         static::startChromeDriver();
     }
 
-    /**
-     * Create the RemoteWebDriver instance.
-     *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
-     */
+
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([

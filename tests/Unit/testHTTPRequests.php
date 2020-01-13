@@ -2,17 +2,29 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
-
+use App\Posts;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 class testHTTPRequests extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+
+    use DatabaseMigrations, WithoutMiddleware;
+
     public function testExample()
     {
-        $this->assertTrue(true);
+        Storage::fake('avatars');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->json('POST', '/avatar', [
+            'avatar' => $file,
+        ]);
+
+        Storage::disk('avatars')->assertExists($file->hashName());
+
+
     }
 }

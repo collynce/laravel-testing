@@ -1,4 +1,4 @@
-@extends('layouts.data')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="nav-scroller py-1 mb-2">
