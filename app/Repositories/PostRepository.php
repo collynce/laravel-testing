@@ -22,8 +22,10 @@ class PostRepository implements PostInterface
 
     public function delete($id)
     {
+
         $post = Posts::findOrFail($id);
         $post->delete();
+        return Cache::forget('posts');
     }
     public function change($id)
     {

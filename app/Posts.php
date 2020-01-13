@@ -8,7 +8,7 @@ use App\User;
 class Posts extends Model
 {
     protected $fillable = [
-        'name', 'author_id', 'title', 'description'
+        'name', 'author_id', 'category_id', 'title', 'description'
     ];
 
 //    public $category;
@@ -39,5 +39,9 @@ class Posts extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'author_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo('App\Category', 'category_id');
     }
 }

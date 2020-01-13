@@ -21,6 +21,10 @@
                                 {!! Form::text('title', old('title'),  ['class' => 'form-control editor', 'placeholder' => '', 'required'=>'']) !!}
                             </div>
                             <div class="col-xs-12 form-group">
+                                {!! Form::label('category_id', 'Category*', ['class' => 'control-label']) !!}
+                                {!! Form::select('category_id', $category, old('category_id'), ['class' => 'form-control select2', 'required' => '']) !!}
+                            </div>
+                            <div class="col-xs-12 form-group">
                                 {!! Form::label('description', 'Description*', ['class' => 'control-label']) !!}
                                 {!! Form::textarea('description',  old('description'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                             </div>

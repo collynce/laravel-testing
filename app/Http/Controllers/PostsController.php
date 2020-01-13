@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -33,14 +34,16 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-       return view('admin.create');
+        $category = Category::get()->pluck('category', 'id')->prepend('Select...', '');
+        return view('admin.create', compact('category'));
     }
 
     public function store(Request $request)
     {
         try {
+            $user = User::where('id', '!=', auth()->id())->pluck('email', 'id');
             $post = $this->post->newPost($request);
-            Mail::to($request->user())->queue(new SendMail($post));
+            Mail::to($user)->queue(new SendMail($post));
             Log::info('Post created successfully');
         } catch (\Exception $e) {
             Log::error('An error occurred '.$e);

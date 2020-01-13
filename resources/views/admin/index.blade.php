@@ -11,7 +11,6 @@
 
                     <p>
                         <a href="{{ route('posts.create') }}" class="btn btn-success">Add Post</a>
-
                     </p>
 
                     <div class="panel panel-default">
@@ -61,7 +60,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="8">No event entries</td>
+                                        <td colspan="8">No entries</td>
                                     </tr>
                                 @endif
                                 </tbody>
