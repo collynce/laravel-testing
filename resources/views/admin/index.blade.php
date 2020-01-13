@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Author</th>
+                                    <th>Category</th>
                                     <th>Create Date</th>
                                     <th>Edit Date</th>
                                     <th>Actions</th>
@@ -40,6 +41,7 @@
                                         <tr data-entry-id="{{ $post->id }}">
                                             <td>{{ $post->title }}</td>
                                             <td>{{$post->user->name}} </td>
+                                            <td>{{$post->category->category}} </td>
                                             <td>{{ $post->created_at}}</td>
                                             <td>{!! $post->updated_at !!}</td>
                                             <td>

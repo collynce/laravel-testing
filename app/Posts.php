@@ -24,11 +24,12 @@ class Posts extends Model
         return $this->attributes['title'] = strtolower($value);
     }
 
-    public function getDescriptionAttribute($value)
+    public function getTitleAttribute($value)
     {
-        return strtoupper($value);
+        return $this->attributes['title'] = strtoupper($value);
 
     }
+
 
 //    protected static function boot()
 //    {
