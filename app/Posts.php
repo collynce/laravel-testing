@@ -26,7 +26,7 @@ class Posts extends Model
 
     public function getDescriptionAttribute($value)
     {
-        return strtolower($value);
+        return strtoupper($value);
 
     }
 

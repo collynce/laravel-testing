@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Posts;
 class PostedBlog
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -19,9 +19,12 @@ class PostedBlog
      *
      * @return void
      */
-    public function __construct()
+
+    public $post;
+
+    public function __construct(Posts $post)
     {
-        //
+        $this->post->$post;
     }
 
     /**

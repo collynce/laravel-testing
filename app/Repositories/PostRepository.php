@@ -15,7 +15,9 @@ class PostRepository implements PostInterface
 
     public function all()
     {
-        return Posts::paginate(5);
+        return Cache::remember('posts', 10, function (){
+            return Posts::paginate(5);
+        });
     }
 
     public function delete($id)
@@ -30,6 +32,7 @@ class PostRepository implements PostInterface
 
     public function newPost(Request $request)
     {
+            Cache::forget('posts');
            return Posts::create($request->all());
     }
     public function newUpdate(Request $request, $id)
